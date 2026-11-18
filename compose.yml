@@ -1,0 +1,15 @@
+services:
+  endfield-checkin:
+    build: .
+    image: endfield-checkin:latest
+    container_name: endfield-checkin
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Daily run times in UTC. 20:30 UTC = 04:30 UTC+8, just after reset; 08:30 is a backup.
+      RUN_TIMES: "20:30,08:30"
+    logging:
+      driver: json-file
+      options:
+        max-size: "1m"
+        max-file: "3"
